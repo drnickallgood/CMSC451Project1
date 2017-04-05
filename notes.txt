@@ -1,0 +1,44 @@
+Data Set 1: 50 arrays of 1000 random numbers
+Data set 2: 50 arrays of 2500 random numbers
+Data Set 3: 50 arrays of 5000 random numbers
+Data Set 4: 50 arrays of 10000 random numbers
+Data Set 5: 50 arrays of 25000 random numbers
+Data Set 6: 50 arrays of 50000 random numbers
+Data Set 7: 50 arrays of 100000 random numbers
+Data Set 8: 50 arrays of 250000 random numbers
+Data set 9: 50 arrays of 500000 random numbers
+Data set 10: 50 arrays of 1000000 random numbers
+
+
+Data Set =   Array of Array of Integers
+
+
+arrayOfArrays[0][0] = Data set 0 , Array 0    (1)
+arrayOfArrrays[0][49] = Data set 0, Array 49   (50)
+...
+arrayOfArrays[9][0] = Data set 10 , array 0   (1)
+arrayOfArrays[9][49] = Data set 10, array 49  (50)
+
+
+1st loop creates data set 1 array entry 0, which is an array of 1000 random numberrs
+
+loop 0 - 9 outer array
+ loop over array[0]
+  0 - 999
+  loop over array[1]
+  0 - 999
+  ...
+  loop over array[49]
+  0 - 999
+
+
+ Create new array of Array
+ loop 1
+  loop over array[0]
+   0 - 2499
+   ...
+   loop over array'49
+
+List<List<Integer>> DataSet1 = new ArrayList<List<Integer>>()
+...
+List<List<Integer>> DataSet10 = new ArrayList<List<Integer>>()
