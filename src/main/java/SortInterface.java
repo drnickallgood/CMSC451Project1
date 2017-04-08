@@ -3,7 +3,7 @@
  */
 public interface SortInterface {
 
-    void recursiveSort(int[] list);
+    int recursiveSort(int[] list, int start);
     void iterativeSort(int[] list);
     int getCount();
     long getTime();
