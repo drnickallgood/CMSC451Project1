@@ -17,104 +17,77 @@ public class BenchmarkSorts {
     public BenchmarkSorts(int[][] dataset) {
 
         this.dataset = dataset;
-        this.reDS = dataset;
+        this.reDS = dataset.clone();
     }
 
-    public long calcCritCount(List<Long> list) {
+    public long calcAverage(List<Long> list) {
 
         long subTotal = 0;
 
         for(Long i : list) {
 
-            subTotal += i ;
+            subTotal += 1;
         }
 
-        return subTotal / (list.size() + 1);
+        return subTotal / list.size();
     }
 
-    public long calcStanDevCount(List<Long> list) {
+    public long calcStandDeviation(List<Long> list) {
 
-        long variance = 0;
-        List<Long> sqDiffs = new ArrayList<Long>();
+        long variance, temp = 0;
+        double squareDiff = 0.0;
 
-        // Get mean
-        long mean = calcCritCount(list);
+        List<Long> squareDiffs = new ArrayList<Long>();
 
-        // FOr each time in the list, subtract the mean and square the diff
+        long mean = calcAverage(list);
+
         for(Long i : list) {
 
-            // Square difference
-            double sqDiff = Math.sqrt(i - mean);
-
-            long temp = (new Double(sqDiff)).longValue();
-
-            sqDiffs.add(temp);
+            squareDiff = Math.sqrt(i - mean);
+            temp = (new Double(squareDiff)).longValue();
+            squareDiffs.add(temp);
         }
 
-        variance = calcCritCount(sqDiffs);
+        variance = calcAverage(squareDiffs);
 
         return variance;
     }
 
-    public long calcAvgTime(List<Long> time) {
+    // Check for already sorted
+    private void runIterative(int[][] list) {
 
-        long subTotal = 0;
+        BubbleSort bsort;
 
-        for(Long i : time) {
+        // Outer loop that runs through the 50 sets of the data set
+        for(int i = 0; i < list.length - 1; i++) {
 
-            subTotal += i ;
-        }
-
-        return subTotal / (time.size() + 1);
-    }
-
-    public long calcStanDevTime(List<Long> times) {
-
-        long variance = 0;
-        List<Long> sqDiffs = new ArrayList<Long>();
-
-        // Get mean
-        long mean = calcAvgTime(times);
-
-        // FOr each time in the list, subtract the mean and square the diff
-        for(Long i : times) {
-
-            // Square difference
-            double sqDiff = Math.sqrt(i - mean);
-
-            long temp = (new Double(sqDiff)).longValue();
-
-            sqDiffs.add(temp);
-        }
-
-        variance = calcAvgTime(sqDiffs);
-
-        return variance;
-
-    }
-
-    public void runSorts() {
-
-        // dataset[0] = array 0 of size 5000
-        // dataset[1] = array 1 of size 5000
-        // ...
-        // dataset[49] = array 49 of size 5000
-        for(int i = 0; i < dataset.length - 1; i++) {
-
-            BubbleSort bsort = new BubbleSort();
-            bsort.iterativeSort(dataset[i]);
+            bsort = new BubbleSort();
+            bsort.iterativeSort(list[i]);
             itTimes.add(bsort.getTime());
             itCount.add(bsort.getCount());
         }
 
-        // Not sorted here yet
-        for(int i = 0; i < reDS.length-1; i++) {
+    }
 
-            BubbleSort bsort = new BubbleSort();
-            bsort.recursiveTimed(reDS[i], reDS[i].length);
-            reTimes.add(bsort.getTime());
-            reCount.add(bsort.getCount());
+    // Check for already sorted
+    private void runRecursive(int[][] list) {
+
+        BubbleSort bsort;
+       // long countTotal = 0;
+
+        for(int i = 0; i < list.length -1; i++) {
+
+            bsort = new BubbleSort();
+            bsort.recursiveTimed(list[i], 0);
+            reTimes.add(bsort.getReTime());
+            reCount.add(bsort.getReCount());
         }
+    }
+
+    public void runSorts() {
+
+        //runIterative(dataset);
+        runRecursive(reDS);
     }
 
     public void printDS(int[][] dataset) {
@@ -128,32 +101,17 @@ public class BenchmarkSorts {
         }
     }
 
-    public void displayReport() throws UnsortedException {
+    public void displayReport() {
 
         // Check if items are sorted
 
-        System.out.println("o Iterative\n");
-        //count | Avg Count | Stand Dev Count | Avg Time(ms) | Stan Dev Time(ms)
-        System.out.println("Data Size\t|\tAvg Count\t|\tStan Dev Count\t|\tAvg Time(ms)\t|\tStan Dev Time(ms)");
-        System.out.println("-------------------------------------------------------------------------------------------");
-        long itTimeRes = calcAvgTime(itTimes);
-        long reTimeRes = calcAvgTime(reTimes);
-        long stanItTimesRes = calcStanDevTime(itTimes);
-        long stanReTimesRes = calcStanDevTime(reTimes);
-        long itCnt = calcCritCount(itCount);
-        long reCnt = calcCritCount(reCount);
-        long stanItCnt = calcStanDevCount(itCount);
-        long stanReCnt = calcStanDevCount(reCount);
-
-        System.out.print(dataset[0].length + " \t\t\t");
-        System.out.print(itCnt + " \t\t\t");
-        System.out.print(stanItCnt + " \t\t\t\t");
-        System.out.print(itTimeRes + " \t\t\t\t\t");
-        System.out.print(stanItTimesRes);
-        System.out.println("\n");
-        System.out.println("\n");
-
         // Recursive
+
+        long reTimeRes = calcAverage(reTimes);
+        long stanReTimesRes = calcStandDeviation(reTimes);
+        long reCnt = calcAverage(reCount);
+        long stanReCnt = calcStandDeviation(reCount);
+
         System.out.println("o Recursive\n");
         System.out.println("Data Size\t|\tAvg Count\t|\tStan Dev Count\t|\tAvg Time(ms)\t|\tStan Dev Time(ms)");
         System.out.println("-------------------------------------------------------------------------------------------");
@@ -166,6 +124,28 @@ public class BenchmarkSorts {
         System.out.println();
         System.out.println("\n");
 
+        /*
+        System.out.println("o Iterative\n");
+        //count | Avg Count | Stand Dev Count | Avg Time(ms) | Stan Dev Time(ms)
+        System.out.println("Data Size\t|\tAvg Count\t|\tStan Dev Count\t|\tAvg Time(ms)\t|\tStan Dev Time(ms)");
+        System.out.println("-------------------------------------------------------------------------------------------");
+        long itTimeRes = calcAvgTime(itTimes);
+        long stanItTimesRes = calcStanDevTime(itTimes);
+        long itCnt = calcCritCount(itCount);
+        long stanItCnt = calcStanDevCount(itCount);
+
+
+
+        System.out.print(dataset[0].length + " \t\t\t");
+        System.out.print(itCnt + " \t\t\t");
+        System.out.print(stanItCnt + " \t\t\t\t");
+        System.out.print(itTimeRes + " \t\t\t\t\t");
+        System.out.print(stanItTimesRes);
+        System.out.println("\n");
+        System.out.println("\n");
+
+
+*/
     }
 
 }
