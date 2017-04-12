@@ -5,8 +5,9 @@ import java.util.*;
 import java.io.*;
 import java.lang.*;
 
-public class SortMain {
 
+// Must be ran with java -Xss258m
+public class SortMain {
 
     public SortMain() {
 
@@ -101,27 +102,45 @@ public class SortMain {
         bs10.runSorts();
 
         // Display Report
+        // Handle unsorted
 
-        System.out.println("*** Report for Data Set 1 ***");
-        bs1.displayReport();
-        System.out.println("*** Report for Data Set 2 ***");
-        bs2.displayReport();
-        System.out.println("*** Report for Data Set 3 ***");
-        bs3.displayReport();
-        System.out.println("*** Report for Data Set 4 ***");
-        bs4.displayReport();
-        System.out.println("*** Report for Data Set 5 ***");
-        bs5.displayReport();
-        System.out.println("*** Report for Data Set 6 ***");
-        bs6.displayReport();
-        System.out.println("*** Report for Data Set 7 ***");
-        bs7.displayReport();
-        System.out.println("*** Report for Data Set 8 ***");
-        bs8.displayReport();
-        System.out.println("*** Report for Data Set 9 ***");
-        bs9.displayReport();
-        System.out.println("*** Report for Data Set 10 ***");
-        bs10.displayReport();
+        try {
+
+            System.out.println("*** Report for Data Set 1 ***");
+            bs1.displayReport();
+            System.out.println("*** End Report ***");
+            System.out.println("*** Report for Data Set 2 ***");
+            bs2.displayReport();
+            System.out.println("*** End Report ***");
+            System.out.println("*** Report for Data Set 3 ***");
+            bs3.displayReport();
+            System.out.println("*** End Report ***");
+            System.out.println("*** Report for Data Set 4 ***");
+            bs4.displayReport();
+            System.out.println("*** End Report ***");
+            System.out.println("*** Report for Data Set 5 ***");
+            bs5.displayReport();
+            System.out.println("*** End Report ***");
+            System.out.println("*** Report for Data Set 6 ***");
+            bs6.displayReport();
+            System.out.println("*** End Report ***");
+            System.out.println("*** Report for Data Set 7 ***");
+            bs7.displayReport();
+            System.out.println("*** End Report ***");
+            System.out.println("*** Report for Data Set 8 ***");
+            bs8.displayReport();
+            System.out.println("*** End Report ***");
+            System.out.println("*** Report for Data Set 9 ***");
+            bs9.displayReport();
+            System.out.println("*** End Report ***");
+            System.out.println("*** Report for Data Set 10 ***");
+            bs10.displayReport();
+            System.out.println("*** End Report ***");
+
+        } catch(UnsortedException e) {
+
+            e.printStackTrace();
+        }
 
     }
 }

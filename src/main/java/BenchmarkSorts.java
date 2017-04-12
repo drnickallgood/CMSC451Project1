@@ -128,7 +128,7 @@ public class BenchmarkSorts {
         }
     }
 
-    public void displayReport() {
+    public void displayReport() throws UnsortedException {
 
         // Average Time
 
