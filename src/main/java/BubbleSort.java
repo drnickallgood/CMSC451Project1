@@ -8,6 +8,7 @@ public class BubbleSort implements SortInterface
     // how many times operations are done before finish
     private static long runCount = 0;
     private static long runTime = 0;
+    private boolean sortedFlag = false;
 
     public BubbleSort() {
 
@@ -64,6 +65,8 @@ public class BubbleSort implements SortInterface
 
         // calculate the running time in milliseconds
         runTime = endTime - startTime;
+
+        sortedFlag = true;
     }
 
     public void recursiveTimed(int[] list, int next) {
@@ -76,6 +79,8 @@ public class BubbleSort implements SortInterface
 
         runTime = endTime - startTime;
 
+        sortedFlag = true;
+
     }
 
     public long getCount() {
@@ -87,6 +92,11 @@ public class BubbleSort implements SortInterface
     public long getTime() {
 
         return runTime;
+    }
+
+    public boolean getSortedFlag() {
+
+        return sortedFlag;
     }
 
     private void printList(int[] list) {

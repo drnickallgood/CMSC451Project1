@@ -111,7 +111,7 @@ public class BenchmarkSorts {
         for(int i = 0; i < reDS.length-1; i++) {
 
             BubbleSort bsort = new BubbleSort();
-            bsort.recursiveSort(reDS[i], reDS[i].length);
+            bsort.recursiveTimed(reDS[i], reDS[i].length);
             reTimes.add(bsort.getTime());
             reCount.add(bsort.getCount());
         }
@@ -130,43 +130,41 @@ public class BenchmarkSorts {
 
     public void displayReport() throws UnsortedException {
 
-        // Average Time
+        // Check if items are sorted
 
+        System.out.println("o Iterative\n");
+        //count | Avg Count | Stand Dev Count | Avg Time(ms) | Stan Dev Time(ms)
+        System.out.println("Data Size\t|\tAvg Count\t|\tStan Dev Count\t|\tAvg Time(ms)\t|\tStan Dev Time(ms)");
+        System.out.println("-------------------------------------------------------------------------------------------");
         long itTimeRes = calcAvgTime(itTimes);
         long reTimeRes = calcAvgTime(reTimes);
-      System.out.println("--- Average Time ---\n");
-        System.out.println("Iterative -  " + dataset[0].length +  " items: " + itTimeRes + "ms");
-        System.out.println("Recursive -  " + dataset[0].length +  " items: " + reTimeRes + "ms");
-      System.out.println();
-
-        // Standard Deviation of Time
-
         long stanItTimesRes = calcStanDevTime(itTimes);
         long stanReTimesRes = calcStanDevTime(reTimes);
-
-       System.out.println("--- Standard Deviation of Time ---\n");
-        System.out.println("Iterative - " + dataset[0].length +  " items: " + stanItTimesRes + "ms");
-        System.out.println("Recursive - " + dataset[0].length +  " items: " + stanReTimesRes + "ms");
-       System.out.println();
-
-       // Calc Avg of Crit operation count
-
         long itCnt = calcCritCount(itCount);
         long reCnt = calcCritCount(reCount);
-        System.out.println("--- Average Critical Operation Count ---\n");
-        System.out.println("Iterative - " + dataset[0].length +  " items: " + itCnt);
-        System.out.println("Recursive - " + dataset[0].length +  " items: " + reCnt);
-        System.out.println();
-
-        // Calc standard deviation of critical operation count
-
         long stanItCnt = calcStanDevCount(itCount);
         long stanReCnt = calcStanDevCount(reCount);
 
-        System.out.println("--- Standard Deviation of Critical Operation Count ---\n");
-        System.out.println("Iterative - " + dataset[0].length +  " items: " + stanItCnt);
-        System.out.println("Recursive - " + dataset[0].length +  " items: " + stanReCnt);
+        System.out.print(dataset[0].length + " \t\t\t");
+        System.out.print(itCnt + " \t\t\t");
+        System.out.print(stanItCnt + " \t\t\t\t");
+        System.out.print(itTimeRes + " \t\t\t\t\t");
+        System.out.print(stanItTimesRes);
+        System.out.println("\n");
+        System.out.println("\n");
+
+        // Recursive
+        System.out.println("o Recursive\n");
+        System.out.println("Data Size\t|\tAvg Count\t|\tStan Dev Count\t|\tAvg Time(ms)\t|\tStan Dev Time(ms)");
+        System.out.println("-------------------------------------------------------------------------------------------");
+
+        System.out.print(reDS[0].length + " \t\t\t");
+        System.out.print(reCnt + " \t\t\t");
+        System.out.print(stanReCnt + " \t\t\t\t");
+        System.out.print(reTimeRes + " \t\t\t\t\t");
+        System.out.print(stanReTimesRes);
         System.out.println();
+        System.out.println("\n");
 
     }
 
