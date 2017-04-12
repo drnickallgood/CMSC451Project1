@@ -29,6 +29,7 @@ public class BenchmarkSorts {
             subTotal += i;
         }
 
+      //  System.out.println(subTotal);
         return subTotal / list.size();
     }
 
@@ -41,9 +42,13 @@ public class BenchmarkSorts {
 
         long mean = calcAverage(list);
 
+       // System.out.println(mean);
+
         for(Long i : list) {
 
-            squareDiff = Math.sqrt(i - mean);
+            long sqTemp = i - mean;
+
+            squareDiff = Math.pow(sqTemp, 2);
             temp = (new Double(squareDiff)).longValue();
             squareDiffs.add(temp);
         }
@@ -84,26 +89,38 @@ public class BenchmarkSorts {
     // Check for already sorted
     private void runRecursive() {
 
-        BubbleSort bsort;
-       // long countTotal = 0;
+        BubbleSort bsort, test;
+        long startTime, endTime, totalTime = 0;
+        long count = 0;
 
         for(int i = 0; i < reDS.length -1; i++) {
 
             bsort = new BubbleSort();
-            bsort.recursiveTimed(reDS[i], 0);
+            test = new BubbleSort(count);
+
+            startTime = System.currentTimeMillis();
+            //bsort.recursiveTimed(reDS[i], 0);
+            test.recursiveTimed(reDS[i], 0);
+
+            endTime = System.currentTimeMillis();
 
             try {
 
-                checkSorted(bsort);
+                checkSorted(test);
 
             } catch(UnsortedException e) {
 
                 e.printStackTrace();
             }
 
+            totalTime = endTime - startTime;
+
             //System.out.println(bsort.getReTime());
-            reTimes.add(bsort.getReTime());
-            reCount.add(bsort.getReCount());
+            //reTimes.add(bsort.getReTime());
+            //reTimes.add(test.getReCount());
+            reTimes.add(totalTime);
+            //reCount.add(bsort.getReCount());
+            reCount.add(test.getNewCount());
         }
     }
 
@@ -118,8 +135,10 @@ public class BenchmarkSorts {
 
     public void runSorts() {
 
-        runIterative();
+        //runIterative();
         runRecursive();
+      // System.out.println(reCount);
+     //  System.out.println(reTimes);
     }
 
     public void printDS(int[][] dataset) {
@@ -139,12 +158,14 @@ public class BenchmarkSorts {
 
 
         // Recursive
-        long reTimeRes = calcAverage(reTimes);
-        long stanReTimesRes = calcStandDeviation(reTimes);
+      long reTimeRes = calcAverage(reTimes);
+      long stanReTimesRes = calcStandDeviation(reTimes);
+
         long reCnt = calcAverage(reCount);
         long stanReCnt = calcStandDeviation(reCount);
 
-        System.out.println("<-- Recursive -->\n");
+
+        System.out.println("[-- Recursive --]\n");
         System.out.println("Data Size\t|\tAvg Count\t|\tStan Dev Count\t|\tAvg Time(ms)\t|\tStan Dev Time(ms)");
         System.out.println("-------------------------------------------------------------------------------------------");
 
@@ -156,7 +177,7 @@ public class BenchmarkSorts {
         System.out.println();
         System.out.println("\n");
 
-
+        /*
         System.out.println("<-- Iterative -->\n");
         //count | Avg Count | Stand Dev Count | Avg Time(ms) | Stan Dev Time(ms)
         System.out.println("Data Size\t|\tAvg Count\t|\tStan Dev Count\t|\tAvg Time(ms)\t|\tStan Dev Time(ms)");
@@ -174,7 +195,7 @@ public class BenchmarkSorts {
         System.out.println("\n");
         System.out.println("\n");
 
-
+*/
 
 
     }

@@ -57,7 +57,7 @@ public class SortMain {
         int[][] ds7 = new int[50][797979];
         int[][] ds8 = new int[50][898989];
         int[][] ds9 = new int[50][999999];
-        int[][] ds10 = new int[50][100000];
+        int[][] ds10 = new int[50][1000000];
 
         List<int[][]> listOfDataSets = new ArrayList<int[][]>();
         listOfDataSets.add(ds1);

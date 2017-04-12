@@ -11,6 +11,16 @@ public class BubbleSort implements SortInterface
     private   long runTime = 0;
     private  static long reRunTime = 0;
     private boolean sortedFlag = false;
+    private long count;
+
+    public BubbleSort() {
+
+    }
+
+    public BubbleSort(long count) {
+
+        this.count = count;
+    }
 
     public long recursiveSort(int[] list, int next) {
 
@@ -18,12 +28,12 @@ public class BubbleSort implements SortInterface
 
         if(next == list.length-1) {
 
-            return reCount;
+            return count;
         }
 
         if(list[next] > list[next+1]) {
 
-            reCount++;
+            count++;
             temp = list[next + 1];
             list[next + 1] = list[next];
             list[next] = temp;
@@ -31,7 +41,7 @@ public class BubbleSort implements SortInterface
 
         recursiveSort(list, next+1);
 
-        return reCount;
+        return count;
     }
 
     public void recursiveTimed(int[] list, int next) {
@@ -112,6 +122,11 @@ public class BubbleSort implements SortInterface
     public long getReCount() {
 
         return reCount;
+    }
+
+    public long getNewCount() {
+
+        return count;
     }
 
     private void printList(int[] list) {
