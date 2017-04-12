@@ -6,9 +6,8 @@ public class BubbleSort implements SortInterface
 {
 
     // how many times operations are done before finish
-    public int runCount;
-    private long runTime;
-    private int recIndex;
+    private static long runCount = 0;
+    private static long runTime = 0;
 
     public BubbleSort() {
 
@@ -17,9 +16,6 @@ public class BubbleSort implements SortInterface
     public int recursiveSort(int[] list, int next) {
 
         int temp;
-        long startTime = System.currentTimeMillis();
-
-        runCount++;
 
         if(next == 1) {
 
@@ -33,12 +29,10 @@ public class BubbleSort implements SortInterface
                 temp = list[i + 1];
                 list[i + 1] = list[i];
                 list[i] = temp;
+
+                runCount++;
             }
         }
-
-       long endTime = System.currentTimeMillis();
-
-        runTime = endTime - startTime;
 
         return recursiveSort(list, next-1);
     }
@@ -48,11 +42,10 @@ public class BubbleSort implements SortInterface
         int temp;
 
         // Count how many times method has been run
-        runCount++;
-       long  startTime = System.currentTimeMillis();
+
+       long startTime = System.currentTimeMillis();
 
         for (int i = 0; i < list.length - 1; i++) {
-
             for (int j = 1; j < list.length - i; j++) {
 
                 if (list[j - 1] > list[j]) {
@@ -60,6 +53,8 @@ public class BubbleSort implements SortInterface
                     temp = list[j - 1];
                     list[j - 1] = list[j];
                     list[j] = temp;
+
+                    runCount++;
                 }
             }
 
@@ -69,11 +64,21 @@ public class BubbleSort implements SortInterface
 
         // calculate the running time in milliseconds
         runTime = endTime - startTime;
+    }
+
+    public void recursiveTimed(int[] list, int next) {
+
+        long startTime = System.currentTimeMillis();
+
+        recursiveSort(list, next);
+
+        long endTime = System.currentTimeMillis();
+
+        runTime = endTime - startTime;
 
     }
 
-
-    public int getCount() {
+    public long getCount() {
 
         return runCount;
 
@@ -93,23 +98,5 @@ public class BubbleSort implements SortInterface
         }
     }
 
-    public static void main(String[] args){
-
-        int[] test = {5, 100, 1, 350, 52, 77, 200, -55};
-
-        BubbleSort myBS = new BubbleSort();
-
-       // myBS.iterativeSort(test);
-      //  System.out.println("Iterative Running time: " + myBS.getTime() + "ms");
-
-        // myBS.printList();
-
-       myBS.recursiveSort(test, test.length);
-       myBS.printList(test);
-
-        System.out.println("Recursive Running time: " + myBS.getTime() + "ms");
-
-
-    }
 
 }
