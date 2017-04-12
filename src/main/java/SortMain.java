@@ -15,7 +15,7 @@ public class SortMain {
 
     public void generateRandom(int[][] dataset) {
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < dataset.length -1; i++) {
 
             // what should j be?
             for (int j = 0; j < dataset[i].length - 1; j++) {
@@ -48,15 +48,15 @@ public class SortMain {
 
         // 10 Data sets
         // each containing 50 arrays of x random numbers
-        int[][] ds1 = new int[50][10000];
-        int[][] ds2 = new int[50][20000];
-        int[][] ds3 = new int[50][30000];
-        int[][] ds4 = new int[50][40000];
-        int[][] ds5 = new int[50][50000];
-        int[][] ds6 = new int[50][60000];
-        int[][] ds7 = new int[50][70000];
-        int[][] ds8 = new int[50][80000];
-        int[][] ds9 = new int[50][90000];
+        int[][] ds1 = new int[50][191919];
+        int[][] ds2 = new int[50][292929];
+        int[][] ds3 = new int[50][393939];
+        int[][] ds4 = new int[50][494949];
+        int[][] ds5 = new int[50][595959];
+        int[][] ds6 = new int[50][696969];
+        int[][] ds7 = new int[50][797979];
+        int[][] ds8 = new int[50][898989];
+        int[][] ds9 = new int[50][999999];
         int[][] ds10 = new int[50][100000];
 
         List<int[][]> listOfDataSets = new ArrayList<int[][]>();

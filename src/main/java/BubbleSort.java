@@ -7,15 +7,14 @@ public class BubbleSort implements SortInterface
 
     // how many times operations are done before finish
     private   long runCount = 0;
-    private    long reCount = 0;
+    private   static long reCount = 0;
     private   long runTime = 0;
-    private   long reRunTime = 0;
+    private  static long reRunTime = 0;
     private boolean sortedFlag = false;
 
     public long recursiveSort(int[] list, int next) {
 
         int temp;
-        long count = 0;
 
         if(next == list.length-1) {
 
@@ -44,6 +43,8 @@ public class BubbleSort implements SortInterface
         long endTime = System.currentTimeMillis();
 
         reRunTime = endTime - startTime;
+
+        //System.out.println(reRunTime);
 
         sortedFlag = true;
 
