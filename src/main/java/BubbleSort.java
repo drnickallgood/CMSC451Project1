@@ -7,11 +7,9 @@ public class BubbleSort implements SortInterface
 
     // how many times operations are done before finish
     private   long runCount = 0;
-    private   static long reCount = 0;
     private   long runTime = 0;
-    private  static long reRunTime = 0;
     private boolean sortedFlag = false;
-    private long count;
+    private  long count;
 
     public BubbleSort() {
 
@@ -22,77 +20,80 @@ public class BubbleSort implements SortInterface
         this.count = count;
     }
 
+    public int[] newRecursive(int[] list, int next) {
+
+        if(next == 1) {
+
+            return list;
+        }
+
+        int temp;
+
+        for(int i = 0; i < next; i++) {
+
+            if(list[i+1] < list[i]) {
+
+                temp = list[i];
+                list[i] = list[i+1];
+                list[i+1] = temp;
+                count++;
+            }
+        }
+
+        sortedFlag = true;
+        return newRecursive(list, next-1);
+    }
+
     public long recursiveSort(int[] list, int next) {
 
         int temp;
 
+        long woo =+ count;
+
         if(next == list.length-1) {
 
-            return count;
+            return woo;
         }
 
         if(list[next] > list[next+1]) {
 
-            count++;
+
             temp = list[next + 1];
             list[next + 1] = list[next];
             list[next] = temp;
+            count++;
         }
 
         recursiveSort(list, next+1);
 
-        return count;
-    }
-
-    public void recursiveTimed(int[] list, int next) {
-
-        long startTime = System.currentTimeMillis();
-
-        recursiveSort(list, next);
-
-        long endTime = System.currentTimeMillis();
-
-        reRunTime = endTime - startTime;
-
-        //System.out.println(reRunTime);
-
         sortedFlag = true;
 
+        return woo;
     }
 
     public void iterativeSort(int[] list) {
 
-        int temp;
-        boolean flag = true;
+        int temp=0;
+        boolean swapped = true;
 
         // Count how many times method has been run
 
-       long startTime = System.currentTimeMillis();
 
-       while(flag) {
+           for(int i = 0; i < list.length; i++) {
 
-           flag = false;
+               for(int j = 1; j < list.length-1; j++) {
+                   count++;
+                   if(list[j-1] > list[j]) {
 
-           for(int i = 0; i < list.length - 1; i++) {
+                       temp = list[j-1];
+                       list[j-1] = list[j];
+                       list[j] = temp;
 
-               if(list[i] > list[i+1]) {
+                   }
 
-                   temp = list[i];
-                   list[i] = list[i+1];
-                   list[i+1] = temp;
-                   flag = true;
-
-                   runCount++;
                }
 
            }
-
-       }
-
-        long endTime = System.currentTimeMillis();
-
-        // calculate the running time in milliseconds
-        runTime = endTime - startTime;
 
         sortedFlag = true;
 
@@ -112,16 +113,6 @@ public class BubbleSort implements SortInterface
     public boolean getSortedFlag() {
 
         return sortedFlag;
-    }
-
-    public long getReTime(){
-
-        return reRunTime;
-    }
-
-    public long getReCount() {
-
-        return reCount;
     }
 
     public long getNewCount() {

@@ -48,16 +48,31 @@ public class SortMain {
 
         // 10 Data sets
         // each containing 50 arrays of x random numbers
-        int[][] ds1 = new int[50][191919];
-        int[][] ds2 = new int[50][292929];
-        int[][] ds3 = new int[50][393939];
-        int[][] ds4 = new int[50][494949];
-        int[][] ds5 = new int[50][595959];
-        int[][] ds6 = new int[50][696969];
-        int[][] ds7 = new int[50][797979];
-        int[][] ds8 = new int[50][898989];
-        int[][] ds9 = new int[50][999999];
-        int[][] ds10 = new int[50][1000000];
+        int[][] ds1 = new int[50][999];
+        int[][] ds2 = new int[50][1999];
+        int[][] ds3 = new int[50][2999];
+        int[][] ds4 = new int[50][3999];
+        int[][] ds5 = new int[50][4999];
+        int[][] ds6 = new int[50][5999];
+        int[][] ds7 = new int[50][6999];
+        int[][] ds8 = new int[50][7999];
+        int[][] ds9 = new int[50][8999];
+        int[][] ds10 = new int[50][9999];
+
+        BenchmarkSorts bs1 = new BenchmarkSorts(ds6);
+
+        /*
+        BenchmarkSorts bs2 = new BenchmarkSorts(ds2);
+        BenchmarkSorts bs3 = new BenchmarkSorts(ds3);
+        BenchmarkSorts bs4 = new BenchmarkSorts(ds4);
+        BenchmarkSorts bs5 = new BenchmarkSorts(ds5);
+        BenchmarkSorts bs6 = new BenchmarkSorts(ds6);
+        BenchmarkSorts bs7 = new BenchmarkSorts(ds7);
+        BenchmarkSorts bs8 = new BenchmarkSorts(ds8);
+        BenchmarkSorts bs9 = new BenchmarkSorts(ds9);
+        BenchmarkSorts bs10 = new BenchmarkSorts(ds10);
+        */
+
 
         List<int[][]> listOfDataSets = new ArrayList<int[][]>();
         listOfDataSets.add(ds1);
@@ -71,16 +86,15 @@ public class SortMain {
         listOfDataSets.add(ds9);
         listOfDataSets.add(ds10);
 
-
         // Create new sort object
         SortMain mySort = new SortMain();
 
         // Generate random numbers
-        mySort.generateRandom(ds1);
-      //  mySort.generateRandom(ds2);
-     //   mySort.generateRandom(ds3);
+        mySort.generateRandom(ds6);
 
         /*
+      mySort.generateRandom(ds2);
+     mySort.generateRandom(ds3);
         mySort.generateRandom(ds4);
         mySort.generateRandom(ds5);
         mySort.generateRandom(ds6);
@@ -88,33 +102,15 @@ public class SortMain {
         mySort.generateRandom(ds8);
         mySort.generateRandom(ds9);
         mySort.generateRandom(ds10);
-
         */
 
-        // Process data
-
-        BenchmarkSorts bs1 = new BenchmarkSorts(ds1);
-
-      //  BenchmarkSorts bs2 = new BenchmarkSorts(ds2);
-      //  BenchmarkSorts bs3 = new BenchmarkSorts(ds3);
-
-        /*
-        BenchmarkSorts bs4 = new BenchmarkSorts(ds4);
-        BenchmarkSorts bs5 = new BenchmarkSorts(ds5);
-        BenchmarkSorts bs6 = new BenchmarkSorts(ds6);
-        BenchmarkSorts bs7 = new BenchmarkSorts(ds7);
-        BenchmarkSorts bs8 = new BenchmarkSorts(ds8);
-        BenchmarkSorts bs9 = new BenchmarkSorts(ds9);
-        BenchmarkSorts bs10 = new BenchmarkSorts(ds10);
-
-        */
 
         // Run Sorting
         bs1.runSorts();
-       // bs2.runSorts();
-      //  bs3.runSorts();
 
         /*
+        bs2.runSorts();
+        bs3.runSorts();
         bs4.runSorts();
         bs5.runSorts();
         bs6.runSorts();
@@ -126,50 +122,19 @@ public class SortMain {
         */
 
         // Display Report
-        // Handle unsorted
-
         bs1.displayReport();
 
-            /*
-            System.out.println("*** Report for Data Set 1 ***\n");
-            bs1.displayReport();
-            System.out.println("*** End Report ***\n");
-            */
-
-            /*
-            System.out.println("*** Report for Data Set 2 ***\n");
-            bs2.displayReport();
-            System.out.println("*** End Report ***\n");
-            System.out.println("*** Report for Data Set 3 ***\n");
-            bs3.displayReport();
-            System.out.println("*** End Report ***\n");
-
-            */
-
-            /*
-            System.out.println("*** Report for Data Set 4 ***\n");
-            bs4.displayReport();
-            System.out.println("*** End Report ***\n");
-            System.out.println("*** Report for Data Set 5 ***\n");
-            bs5.displayReport();
-            System.out.println("*** End Report ***\n");
-            System.out.println("*** Report for Data Set 6 ***\n");
-            bs6.displayReport();
-            System.out.println("*** End Report ***\n");
-            System.out.println("*** Report for Data Set 7 ***\n");
-            bs7.displayReport();
-            System.out.println("*** End Report ***\n");
-            System.out.println("*** Report for Data Set 8 ***\n");
-            bs8.displayReport();
-            System.out.println("*** End Report ***\n");
-            System.out.println("*** Report for Data Set 9 ***\n");
-            bs9.displayReport();
-            System.out.println("*** End Report ***\n");
-            System.out.println("*** Report for Data Set 10 ***\n");
-            bs10.displayReport();
-            System.out.println("*** End Report ***\n");
-            */
-
+        /*
+        bs2.displayReport();
+        bs3.displayReport();
+        bs4.displayReport();
+        bs5.displayReport();
+        bs6.displayReport();
+        bs7.displayReport();
+        bs8.displayReport();
+        bs9.displayReport();
+        bs10.displayReport();
+    */
 
     }
 

@@ -35,7 +35,7 @@ public class BenchmarkSorts {
 
     public long calcStandDeviation(List<Long> list) {
 
-        long variance, temp = 0;
+        long variance, temp, result = 0;
         double squareDiff = 0.0;
 
         List<Long> squareDiffs = new ArrayList<Long>();
@@ -47,27 +47,33 @@ public class BenchmarkSorts {
         for(Long i : list) {
 
             long sqTemp = i - mean;
-
             squareDiff = Math.pow(sqTemp, 2);
             temp = (new Double(squareDiff)).longValue();
             squareDiffs.add(temp);
         }
 
+        // Get average of squared difffs to get the variance
         variance = calcAverage(squareDiffs);
 
-        return variance;
+        // Take the square root of the variance
+        result = (new Double(Math.sqrt(variance)).longValue());
+
+        return result;
     }
 
     // Check for already sorted
     private void runIterative() {
 
         BubbleSort bsort;
+        long startTime, endTime, totalTime, count = 0;
 
         // Outer loop that runs through the 50 sets of the data set
         for(int i = 0; i < dataset.length - 1; i++) {
 
-            bsort = new BubbleSort();
+            bsort = new BubbleSort(count);
+            startTime = System.currentTimeMillis();
             bsort.iterativeSort(dataset[i]);
+            endTime = System.currentTimeMillis();
 
             try {
 
@@ -78,35 +84,31 @@ public class BenchmarkSorts {
                 e.printStackTrace();
             }
 
-            itTimes.add(bsort.getTime());
-            itCount.add(bsort.getCount());
+            totalTime = endTime - startTime;
+            itTimes.add(totalTime);
+            itCount.add(bsort.getNewCount());
         }
-
-        System.out.println("\n\n");
-
     }
 
     // Check for already sorted
     private void runRecursive() {
 
-        BubbleSort bsort, test;
-        long startTime, endTime, totalTime = 0;
-        long count = 0;
+        BubbleSort bsort;
+        long startTime, endTime, totalTime, count = 0;
 
         for(int i = 0; i < reDS.length -1; i++) {
 
-            bsort = new BubbleSort();
-            test = new BubbleSort(count);
+            bsort = new BubbleSort(count);
 
             startTime = System.currentTimeMillis();
-            //bsort.recursiveTimed(reDS[i], 0);
-            test.recursiveTimed(reDS[i], 0);
+            //bsort.recursiveSort(reDS[i], 0);
+            bsort.newRecursive(reDS[i], reDS[i].length-1);
 
             endTime = System.currentTimeMillis();
 
             try {
 
-                checkSorted(test);
+                checkSorted(bsort);
 
             } catch(UnsortedException e) {
 
@@ -115,12 +117,8 @@ public class BenchmarkSorts {
 
             totalTime = endTime - startTime;
 
-            //System.out.println(bsort.getReTime());
-            //reTimes.add(bsort.getReTime());
-            //reTimes.add(test.getReCount());
             reTimes.add(totalTime);
-            //reCount.add(bsort.getReCount());
-            reCount.add(test.getNewCount());
+            reCount.add(bsort.getNewCount());
         }
     }
 
@@ -135,10 +133,13 @@ public class BenchmarkSorts {
 
     public void runSorts() {
 
-        //runIterative();
+        // Something is happening here and iterative is messing with recursive
         runRecursive();
-      // System.out.println(reCount);
-     //  System.out.println(reTimes);
+       // printDS(reDS);
+       runIterative();
+      // System.out.println(itTimes);
+     //  System.out.println(itCount);
+       //printDS(dataset);
     }
 
     public void printDS(int[][] dataset) {
@@ -154,31 +155,8 @@ public class BenchmarkSorts {
 
     public void displayReport() {
 
-        // Check if items are sorted
-
-
-        // Recursive
-      long reTimeRes = calcAverage(reTimes);
-      long stanReTimesRes = calcStandDeviation(reTimes);
-
-        long reCnt = calcAverage(reCount);
-        long stanReCnt = calcStandDeviation(reCount);
-
-
-        System.out.println("[-- Recursive --]\n");
-        System.out.println("Data Size\t|\tAvg Count\t|\tStan Dev Count\t|\tAvg Time(ms)\t|\tStan Dev Time(ms)");
-        System.out.println("-------------------------------------------------------------------------------------------");
-
-        System.out.print(reDS[0].length + " \t\t\t");
-        System.out.print(reCnt + " \t\t\t");
-        System.out.print(stanReCnt + " \t\t\t\t");
-        System.out.print(reTimeRes + " \t\t\t\t\t");
-        System.out.print(stanReTimesRes);
-        System.out.println();
-        System.out.println("\n");
-
-        /*
-        System.out.println("<-- Iterative -->\n");
+        //Iterative
+        System.out.println("[-- Iterative --]\n");
         //count | Avg Count | Stand Dev Count | Avg Time(ms) | Stan Dev Time(ms)
         System.out.println("Data Size\t|\tAvg Count\t|\tStan Dev Count\t|\tAvg Time(ms)\t|\tStan Dev Time(ms)");
         System.out.println("-------------------------------------------------------------------------------------------");
@@ -193,10 +171,29 @@ public class BenchmarkSorts {
         System.out.print(itTimeRes + " \t\t\t\t\t");
         System.out.print(stanItTimesRes);
         System.out.println("\n");
+
+        // Recursive
+      long reTimeRes = calcAverage(reTimes);
+      long stanReTimesRes = calcStandDeviation(reTimes);
+      long reCnt = calcAverage(reCount);
+      long stanReCnt = calcStandDeviation(reCount);
+
+        System.out.println("[-- Recursive --]\n");
+        System.out.println("Data Size\t|\tAvg Count\t|\tStan Dev Count\t|\tAvg Time(ms)\t|\tStan Dev Time(ms)");
+        System.out.println("-------------------------------------------------------------------------------------------");
+        System.out.print(reDS[0].length + " \t\t\t");
+        System.out.print(reCnt + " \t\t\t");
+        System.out.print(stanReCnt + " \t\t\t\t");
+        System.out.print(reTimeRes + " \t\t\t\t\t");
+        System.out.print(stanReTimesRes);
+        System.out.println();
         System.out.println("\n");
 
-*/
+        //
 
+
+        System.out.println();
+        System.out.println("---\n");
 
     }
 
