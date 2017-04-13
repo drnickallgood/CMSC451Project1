@@ -4,7 +4,7 @@
 public interface SortInterface {
 
     long recursiveSort(int[] list, int start);
-    void iterativeSort(int[] list);
+    long iterativeSort(int[] list);
     long getCount();
     long getTime();
 

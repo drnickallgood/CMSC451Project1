@@ -9,7 +9,7 @@ public class BubbleSort implements SortInterface
     private   long runCount = 0;
     private   long runTime = 0;
     private boolean sortedFlag = false;
-    private  long count;
+    private   long count;
 
     public BubbleSort() {
 
@@ -71,14 +71,11 @@ public class BubbleSort implements SortInterface
         return woo;
     }
 
-    public void iterativeSort(int[] list) {
+    public long iterativeSort(int[] list) {
 
         int temp=0;
-        boolean swapped = true;
 
         // Count how many times method has been run
-
-
            for(int i = 0; i < list.length; i++) {
 
                for(int j = 1; j < list.length-1; j++) {
@@ -97,6 +94,7 @@ public class BubbleSort implements SortInterface
 
         sortedFlag = true;
 
+        return count;
     }
 
     public long getCount() {

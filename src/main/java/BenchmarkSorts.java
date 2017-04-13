@@ -72,7 +72,7 @@ public class BenchmarkSorts {
 
             bsort = new BubbleSort(count);
             startTime = System.currentTimeMillis();
-            bsort.iterativeSort(dataset[i]);
+            count = bsort.iterativeSort(dataset[i]);
             endTime = System.currentTimeMillis();
 
             try {
@@ -86,7 +86,7 @@ public class BenchmarkSorts {
 
             totalTime = endTime - startTime;
             itTimes.add(totalTime);
-            itCount.add(bsort.getNewCount());
+            itCount.add(count);
         }
     }
 
@@ -136,9 +136,15 @@ public class BenchmarkSorts {
         // Something is happening here and iterative is messing with recursive
         runRecursive();
        // printDS(reDS);
+      //  System.out.println("--- Pre Sort ---");
+    ////    printDSList(dataset[0]);
+
        runIterative();
-      // System.out.println(itTimes);
-     //  System.out.println(itCount);
+      //  System.out.println("--- Post Sort ---");
+      //  printDSList(dataset[0]);
+
+        // System.out.println(itTimes);
+     //System.out.println(itCount);
        //printDS(dataset);
     }
 
@@ -150,6 +156,14 @@ public class BenchmarkSorts {
 
                 System.out.println(dataset[i][j]);
             }
+        }
+    }
+
+    public void printDSList(int[] list) {
+
+        for(int i = 0; i < list.length; i++) {
+
+            System.out.println(list[i]);
         }
     }
 
@@ -171,6 +185,7 @@ public class BenchmarkSorts {
         System.out.print(itTimeRes + " \t\t\t\t\t");
         System.out.print(stanItTimesRes);
         System.out.println("\n");
+
 
         // Recursive
       long reTimeRes = calcAverage(reTimes);

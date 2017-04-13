@@ -48,20 +48,18 @@ public class SortMain {
 
         // 10 Data sets
         // each containing 50 arrays of x random numbers
-        int[][] ds1 = new int[50][999];
-        int[][] ds2 = new int[50][1999];
-        int[][] ds3 = new int[50][2999];
-        int[][] ds4 = new int[50][3999];
-        int[][] ds5 = new int[50][4999];
-        int[][] ds6 = new int[50][5999];
-        int[][] ds7 = new int[50][6999];
-        int[][] ds8 = new int[50][7999];
-        int[][] ds9 = new int[50][8999];
-        int[][] ds10 = new int[50][9999];
+        int[][] ds1 = new int[50][1919];
+        int[][] ds2 = new int[50][2929];
+        int[][] ds3 = new int[50][3939];
+        int[][] ds4 = new int[50][4949];
+        int[][] ds5 = new int[50][5959];
+        int[][] ds6 = new int[50][6969];
+        int[][] ds7 = new int[50][7979];
+        int[][] ds8 = new int[50][8989];
+        int[][] ds9 = new int[50][9999];
+        int[][] ds10 = new int[50][19199];
 
-        BenchmarkSorts bs1 = new BenchmarkSorts(ds6);
-
-        /*
+        BenchmarkSorts bs1 = new BenchmarkSorts(ds1);
         BenchmarkSorts bs2 = new BenchmarkSorts(ds2);
         BenchmarkSorts bs3 = new BenchmarkSorts(ds3);
         BenchmarkSorts bs4 = new BenchmarkSorts(ds4);
@@ -71,9 +69,8 @@ public class SortMain {
         BenchmarkSorts bs8 = new BenchmarkSorts(ds8);
         BenchmarkSorts bs9 = new BenchmarkSorts(ds9);
         BenchmarkSorts bs10 = new BenchmarkSorts(ds10);
-        */
 
-
+        /*
         List<int[][]> listOfDataSets = new ArrayList<int[][]>();
         listOfDataSets.add(ds1);
         listOfDataSets.add(ds2);
@@ -85,14 +82,14 @@ public class SortMain {
         listOfDataSets.add(ds8);
         listOfDataSets.add(ds9);
         listOfDataSets.add(ds10);
+        */
 
         // Create new sort object
         SortMain mySort = new SortMain();
 
         // Generate random numbers
-        mySort.generateRandom(ds6);
+        mySort.generateRandom(ds1);
 
-        /*
       mySort.generateRandom(ds2);
      mySort.generateRandom(ds3);
         mySort.generateRandom(ds4);
@@ -102,13 +99,10 @@ public class SortMain {
         mySort.generateRandom(ds8);
         mySort.generateRandom(ds9);
         mySort.generateRandom(ds10);
-        */
 
 
         // Run Sorting
         bs1.runSorts();
-
-        /*
         bs2.runSorts();
         bs3.runSorts();
         bs4.runSorts();
@@ -119,12 +113,8 @@ public class SortMain {
         bs9.runSorts();
         bs10.runSorts();
 
-        */
-
         // Display Report
         bs1.displayReport();
-
-        /*
         bs2.displayReport();
         bs3.displayReport();
         bs4.displayReport();
@@ -134,7 +124,6 @@ public class SortMain {
         bs8.displayReport();
         bs9.displayReport();
         bs10.displayReport();
-    */
 
     }
 
